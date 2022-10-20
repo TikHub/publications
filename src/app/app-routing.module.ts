@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { HomepageComponent } from './homepage/homepage.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { HomepageComponent } from './public/homepage/homepage.component';
+import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -12,7 +12,7 @@ export const routes: Routes = [
   {
     path: 'users',
     loadComponent: () =>
-      import('./users/users.component').then((m) => m.UsersComponent),
+      import('./private/users/users.component').then((m) => m.UsersComponent),
     title: 'Users',
   },
   {
