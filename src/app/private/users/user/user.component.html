@@ -1,0 +1,17 @@
+<div class="user">
+  <h2 class="user__name">{{ userData.name }}</h2>
+  <p>
+    <strong>Email:</strong>
+    <a href="mailto:{{ userData.email }}" class="user__email">{{
+      userData.email
+    }}</a>
+  </p>
+  <p class="user__phone"><strong>Phone:</strong> {{ userData.phone }}</p>
+  <p class="user__userName">
+    <strong>Username:</strong> {{ userData.username }}
+  </p>
+  <p class="user__website"><strong>Website:</strong> {{ userData.website }}</p>
+  <hr />
+  <h4 class="user__postCount">Total: {{ userData.posts.length }} posts</h4>
+  <a [routerLink]="['/users', userData.id]" class="user__seeMore">See posts</a>
+</div>

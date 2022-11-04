@@ -1,46 +1,54 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, finalize, first, Observable } from 'rxjs';
-import { IPost } from '../interfaces';
+import {
+  BehaviorSubject,
+  filter,
+  finalize,
+  first,
+  from,
+  map,
+  mergeMap,
+  Observable,
+  switchMap,
+  tap,
+} from 'rxjs';
+import { LoaderService } from 'src/app/shared/services/loader.service';
+import { IPost, IUser, IUserPost } from '../../shared/interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
   private BASE_URL = 'https://jsonplaceholder.typicode.com';
-  private posts$ = new BehaviorSubject<IPost[]>([]);
-  private users$ = new BehaviorSubject<any[]>([]);
+  private userMappedPosts$ = new BehaviorSubject<any>([]);
 
-  posts: Observable<IPost[]> = this.posts$.asObservable();
-  users: Observable<IPost[]> = this.users$.asObservable();
+  userMappedPosts: Observable<IUserPost> = this.userMappedPosts$.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private loaderService: LoaderService) {}
 
-  getPosts(): void {
-    this.http
-      .get(`${this.BASE_URL}/posts`)
-      .pipe(
-        first(),
-        finalize(() => {
-          // TODO: Disable loader
-        })
-      )
-      .subscribe((posts: any) => {
-        this.posts$.next(posts);
-      });
-  }
+  getUserData(): Observable<IUserPost[]> {
+    this.loaderService.isLoading$.next(true);
 
-  getUsers(): void {
-    this.http
-      .get(`${this.BASE_URL}/users`)
-      .pipe(
-        first(),
-        finalize(() => {
-          // TODO: Disable loader
-        })
-      )
-      .subscribe((users: any) => {
-        this.users$.next(users);
-      });
+    return this.http.get<IUser[]>(`${this.BASE_URL}/users`).pipe(
+      first(),
+      switchMap((users) => {
+        return this.http.get<IPost[]>(`${this.BASE_URL}/posts`).pipe(
+          map((posts: IPost[]) => {
+            return users.map((user: IUser) => {
+              return {
+                ...user,
+                posts: [...posts.filter((post) => post.userId === user.id)],
+              };
+            });
+          })
+        );
+      }),
+      finalize(() => {
+        this.loaderService.isLoading$.next(false);
+      })
+    );
+    // .subscribe((data) => {
+    //   this.userMappedPosts$.next(data);
+    // });
   }
 }

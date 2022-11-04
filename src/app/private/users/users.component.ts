@@ -2,34 +2,31 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersService } from './users.service';
 
-import { IPost } from '../interfaces';
+import { IPost, IUserPost } from '../../shared/interfaces';
+import { SharedService } from 'src/app/shared/services/shared.service';
+import { UserComponent } from './user/user.component';
+import { RouterModule } from '@angular/router';
+// import { routes } from './users-routing.module';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, UserComponent /* RouterModule.forChild(routes) */],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  data: IPost[] = [];
-  users: any[] = [];
-  constructor(private usersService: UsersService) {}
+  userData: IUserPost[];
+
+  constructor(
+    private usersService: UsersService,
+    private sharedService: SharedService
+  ) {}
 
   ngOnInit(): void {
-    this.usersService.getPosts();
-    this.usersService.getUsers();
-
-    this.usersService.posts.subscribe((data: IPost[]) => {
+    this.sharedService.userData.subscribe((data) => {
       if (data) {
-        this.data = data;
-        console.log(this.data);
-      }
-    });
-    this.usersService.users.subscribe((data: any[]) => {
-      if (data) {
-        this.users = data;
-        console.log(this.users);
+        this.userData = data;
       }
     });
   }

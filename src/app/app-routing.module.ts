@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
+import { DetailsComponent } from './private/users/details/details.component';
 import { HomepageComponent } from './public/homepage/homepage.component';
-import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -16,8 +17,17 @@ export const routes: Routes = [
     title: 'Users',
   },
   {
-    path: '**',
+    path: 'users/:id',
+    component: DetailsComponent,
+    title: 'Details',
+  },
+  {
+    path: 'not-found',
     component: NotFoundComponent,
     title: '404',
+  },
+  {
+    path: '**',
+    redirectTo: '/not-found',
   },
 ];

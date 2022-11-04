@@ -1,13 +1,21 @@
 :host {
-  .homepage {
+  .notFound {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    &__content {
+      max-height: 300px;
+    }
     &__text {
       font-size: 240px;
       color: #48a9e6;
       line-height: 1;
+      &::after {
+        content: "PAGE NOT FOUND";
+        font-size: 40px;
+        display: block;
+      }
     }
   }
 }

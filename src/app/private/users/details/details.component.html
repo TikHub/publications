@@ -1,0 +1,14 @@
+<section class="details">
+  <div class="details__content">
+    <ng-container *ngIf="selectedUser">
+      <h1 class="details__title">
+        Posts of <strong>{{ selectedUser.name }}</strong>
+      </h1>
+      <app-post
+        *ngFor="let post of selectedUser.posts"
+        [post]="post"
+      ></app-post>
+    </ng-container>
+    <p *ngIf="!selectedUser">No post found</p>
+  </div>
+</section>

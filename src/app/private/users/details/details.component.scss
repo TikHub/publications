@@ -1,0 +1,13 @@
+:host {
+    .details {
+        padding: 15px;
+        display: flex;
+        justify-content: center;
+        &__content {
+            max-width: 800px;
+        }
+        &__title {
+            font-weight: normal;
+        }
+    }
+}

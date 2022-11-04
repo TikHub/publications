@@ -1,1 +1,11 @@
-<p>users works!</p>
+<div class="users">
+  <div class="users__content">
+    <h1 class="users__title">Users</h1>
+    <ng-container *ngIf="userData">
+      <div class="users__container">
+        <app-user *ngFor="let user of userData" [userData]="user"></app-user>
+      </div>
+    </ng-container>
+    <p *ngIf="!userData">No user found</p>
+  </div>
+</div>

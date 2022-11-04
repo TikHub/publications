@@ -1,0 +1,20 @@
+:host {
+  .users {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    &__content {
+      max-width: 1200px;
+    }
+    &__title {
+      color: #48a9e6;
+      font-size: 40px;
+      text-align: center;
+    }
+    &__container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+}

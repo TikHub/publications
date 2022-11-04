@@ -1,0 +1,16 @@
+:host {
+  // min-width: calc(100% / 4);
+  min-width: 300px;
+  .user {
+    border: 1px solid #48a9e6;
+    margin: 5px;
+    padding: 15px;
+    &:hover {
+      color: #fff;
+      background-color: #48a9e6;
+      transition: 0.3s;
+    }
+    &__seeMore {
+    }
+  }
+}
