@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { DetailsComponent } from './private/users/details/details.component';
+
 import { HomepageComponent } from './public/homepage/homepage.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 
@@ -12,14 +12,9 @@ export const routes: Routes = [
   },
   {
     path: 'users',
-    loadComponent: () =>
-      import('./private/users/users.component').then((m) => m.UsersComponent),
+    loadChildren: () =>
+      import('./private/users/user-routes').then((m) => m.routes),
     title: 'Users',
-  },
-  {
-    path: 'users/:id',
-    component: DetailsComponent,
-    title: 'Details',
   },
   {
     path: 'not-found',

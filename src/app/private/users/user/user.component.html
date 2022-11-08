@@ -1,7 +1,7 @@
 <div class="user">
   <h2 class="user__name">{{ userData.name }}</h2>
   <p>
-    <strong>Email:</strong>
+    <strong>Email: </strong>
     <a href="mailto:{{ userData.email }}" class="user__email">{{
       userData.email
     }}</a>
@@ -13,5 +13,7 @@
   <p class="user__website"><strong>Website:</strong> {{ userData.website }}</p>
   <hr />
   <h4 class="user__postCount">Total: {{ userData.posts.length }} posts</h4>
-  <a [routerLink]="['/users', userData.id]" class="user__seeMore">See posts</a>
+  <h3 class="user__seeMore">
+    <a [routerLink]="['/users', userData.id]">See posts</a>
+  </h3>
 </div>

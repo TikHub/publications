@@ -36,18 +36,5 @@ export class AppComponent implements OnInit {
     this.usersService.getUserData().subscribe((data: IUserPost[]) => {
       this.sharedService.userData$.next(data);
     });
-
-    // this.getUserData();
   }
-
-  // private getUserData() {
-  //   this.loaderService.isLoading$.next(true);
-
-  //   this.usersService.userMappedPosts.subscribe((data) => {
-  //     if (data) {
-  //       this.sharedService.userData$.next(data);
-  //       this.loaderService.isLoading$.next(false);
-  //     }
-  //   });
-  // }
 }

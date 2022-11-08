@@ -2,15 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   BehaviorSubject,
-  filter,
   finalize,
   first,
-  from,
   map,
-  mergeMap,
   Observable,
   switchMap,
-  tap,
 } from 'rxjs';
 import { LoaderService } from 'src/app/shared/services/loader.service';
 import { IPost, IUser, IUserPost } from '../../shared/interfaces';
@@ -47,8 +43,5 @@ export class UsersService {
         this.loaderService.isLoading$.next(false);
       })
     );
-    // .subscribe((data) => {
-    //   this.userMappedPosts$.next(data);
-    // });
   }
 }
